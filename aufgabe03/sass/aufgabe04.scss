@@ -1,0 +1,22 @@
+/*Aufgabe a*/
+/*Habe ich diese Aufgabe so richtig verstanden ? Ich wusste wirklich nicht was hier verlangt ist.*/
+@mixin margin ($values...)
+{
+  @each $var in $values
+  {
+    margin: #{$var}
+  }
+}
+
+body
+{
+
+
+  @include margin(5px 10px 500px);
+}
+
+
+/*Aufgabe b*/
+
+/*Ich habe es wirklich lange versucht aber nicht verstanden was gefragt war .. der mixin ist also wie
+eine Methode die dann den Media Query ausführt oder ?*/
