@@ -1,6 +1,31 @@
 @import "compass/reset";
 @import "compass/css3";
 
+
+/* Eine von zwei Möglichkeiten ist es in der Config.rb Datei den Output style zu ändern bsp.: :compressed und die Änderung mit Compass watch im Terminal anzuzeigen
+oder die zweite Möglichkeit ist es über das Terminal direkt eine Änderung vorzunehmen mit dem Befehl compass compile --output-style (..styleart, expanded, nested oder
+compressed) --force*/
+
+/*Ich finde hier nicht wirklich etwas was Sinn machen würde zu vererben. Könnten wir dies noch einmal in der Vorlesung besprechen da ich es versucht hätte aber sich
+nichts getan hat*/
+
+/* Line 9, Colors Variablen ../sass/main.scss*/
+$schwarz:#000;
+$Weiß:#fafafa;
+$Rot:#d9534f;
+$Orange:#f0ad4e;
+$Grün:#5cb85c;
+$Grau:#d3d3d3;
+
+/*Line 20 Mixins, Transition-properties ../sass/main.scss mit @include transition verwende ich diese dann*/
+@mixin transition
+{
+    transition-property: width;
+    transition-delay: 0ms;
+    transition-duration: 250ms;
+    transition-timing-function: linear;
+}
+
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -16,7 +41,7 @@ body {
 
 
 input[type="text"],input[type="password"] {
-    border:1px solid #000;
+    border:1px solid $schwarz;
     padding:5px;
     margin:10px 5px 10px 5px;
 
@@ -24,9 +49,9 @@ input[type="text"],input[type="password"] {
 }
 
 input[type="submit"] {
-    border:1px solid #000;
+    border:1px solid $schwarz;
     border-radius:0;
-    background-color:#fafafa;
+    background-color:$Weiß;
     margin:10px 5px 10px 5px;
     cursor:pointer;
 }
@@ -43,60 +68,45 @@ label {
 .passwordFeedback {
     width:250px;
     float:left;
+
+        .feedback {
+        margin:10px 5px 10px 5px;
+        font-size:11px;
+        font-weight:600;
+
+    }
+            .feedback.error {
+            color: $Rot;
+             }
+
+            .feedback.warning {
+                color:$Orange;
+                }
+
+            .feedback.success {
+                color:$Grün;
+            }
+
+                .strengthIndicator {
+                    margin:10px 5px 10px 5px;
+                    width: 200px;
+                    padding:5px;
+                    height: 13px;
+                    border:1px solid $Grau;
+                }
+
+                    .strengthIndicator::before {
+                        content: "";
+                        display: block;
+                        height: 100%;
+
+                       @include transition;
+                    }
 }
 
-.feedback {
-    margin:10px 5px 10px 5px;
-    font-size:11px;
-    font-weight:600;
 
-}
 
-.feedback.error {
-    color:#d9534f;
-}
 
-.feedback.warning {
-    color:#f0ad4e;
-}
-
-.feedback.success {
-    color:#5cb85c;
-}
-
-.strengthIndicator {
-    margin:10px 5px 10px 5px;
-    width: 200px;
-    padding:5px;
-    height: 13px;
-    border:1px solid #d3d3d3;
-}
-
-.strengthIndicator::before {
-    content: "";
-    display: block;
-    height: 100%;
-
-    -moz-transition-property: width;
-    -o-transition-property: width;
-    -webkit-transition-property: width;
-    transition-property: width;
-
-    -moz-transition-delay: 0;
-    -o-transition-delay: 0;
-    -webkit-transition-delay: 0;
-    transition-delay: 0;
-
-    -moz-transition-duration: 250ms;
-    -o-transition-duration: 250ms;
-    -webkit-transition-duration: 250ms;
-    transition-duration: 250ms;
-
-    -moz-transition-timing-function: linear;
-    -o-transition-timing-function: linear;
-    -webkit-transition-timing-function: linear;
-    transition-timing-function: linear;
-}
 
 .passwordWrapper::after {
     content: "";
@@ -107,17 +117,17 @@ label {
 
 .error .strengthIndicator::before {
     width: 10%;
-    background-color: #d9534f;
+    background-color: $Rot;
 }
 
 .warning .strengthIndicator::before {
     width: 60%;
-    background-color: #f0ad4e;
+    background-color: $Orange;
 }
 
 .success .strengthIndicator::before {
     width: 100%;
-    background-color: #5cb85c;
+    background-color: $Grün;
 }
 
 .feedback.error, .feedback.warning, .feedback.success {
